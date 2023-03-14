@@ -4,7 +4,7 @@
 #
 Name     : R-vroom
 Version  : 1.6.1
-Release  : 12
+Release  : 13
 URL      : https://cran.r-project.org/src/contrib/vroom_1.6.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/vroom_1.6.1.tar.gz
 Summary  : Read and Write Rectangular Text Data Quickly
@@ -41,9 +41,6 @@ BuildRequires : R-tzdb
 BuildRequires : R-vctrs
 BuildRequires : R-withr
 BuildRequires : buildreq-R
-# Suppress stripping binaries
-%define __strip /bin/true
-%define debug_package %{nil}
 
 %description
 'tsv' and 'fwf') quickly. When reading it uses a quick initial
@@ -77,10 +74,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1674500733
+export SOURCE_DATE_EPOCH=1678826386
 
 %install
-export SOURCE_DATE_EPOCH=1674500733
+export SOURCE_DATE_EPOCH=1678826386
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/R-vroom
 cp %{_builddir}/vroom/src/mio/LICENSE %{buildroot}/usr/share/package-licenses/R-vroom/eda6909f9b9d9117d4d800f37af80251ab1edd41 || :
