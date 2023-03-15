@@ -4,7 +4,7 @@
 #
 Name     : R-vroom
 Version  : 1.6.1
-Release  : 13
+Release  : 14
 URL      : https://cran.r-project.org/src/contrib/vroom_1.6.1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/vroom_1.6.1.tar.gz
 Summary  : Read and Write Rectangular Text Data Quickly
