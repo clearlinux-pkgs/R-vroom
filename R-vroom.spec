@@ -4,10 +4,10 @@
 # Using build pattern: R
 #
 Name     : R-vroom
-Version  : 1.6.3
-Release  : 17
-URL      : https://cran.r-project.org/src/contrib/vroom_1.6.3.tar.gz
-Source0  : https://cran.r-project.org/src/contrib/vroom_1.6.3.tar.gz
+Version  : 1.6.4
+Release  : 18
+URL      : https://cran.r-project.org/src/contrib/vroom_1.6.4.tar.gz
+Source0  : https://cran.r-project.org/src/contrib/vroom_1.6.4.tar.gz
 Summary  : Read and Write Rectangular Text Data Quickly
 Group    : Development/Tools
 License  : MIT
@@ -68,27 +68,30 @@ license components for the R-vroom package.
 
 %prep
 %setup -q -n vroom
+pushd ..
+cp -a vroom buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683149773
+export SOURCE_DATE_EPOCH=1696266471
 
 %install
-export SOURCE_DATE_EPOCH=1683149773
+export SOURCE_DATE_EPOCH=1696266471
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/R-vroom
 cp %{_builddir}/vroom/src/mio/LICENSE %{buildroot}/usr/share/package-licenses/R-vroom/eda6909f9b9d9117d4d800f37af80251ab1edd41 || :
-export LANG=C.UTF-8
-export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
-export AR=gcc-ar
-export RANLIB=gcc-ranlib
-export LDFLAGS="$LDFLAGS  -Wl,-z -Wl,relro"
+LANG=C.UTF-8
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -flto -fno-semantic-interposition "
+FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -flto -fno-semantic-interposition "
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -flto -fno-semantic-interposition "
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -flto -fno-semantic-interposition "
+AR=gcc-ar
+RANLIB=gcc-ranlib
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS  -Wl,-z -Wl,relro"
 mkdir -p %{buildroot}/usr/lib64/R/library
 
 mkdir -p ~/.R
@@ -117,6 +120,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
 R CMD check --no-manual --no-examples --no-codoc . || :
 
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -228,6 +232,7 @@ R CMD check --no-manual --no-examples --no-codoc . || :
 /usr/lib64/R/library/vroom/extdata/mtcars-4.csv
 /usr/lib64/R/library/vroom/extdata/mtcars-6.csv
 /usr/lib64/R/library/vroom/extdata/mtcars-8.csv
+/usr/lib64/R/library/vroom/extdata/mtcars-multi-cyl.zip
 /usr/lib64/R/library/vroom/extdata/mtcars.csv
 /usr/lib64/R/library/vroom/extdata/mtcars.csv.bz2
 /usr/lib64/R/library/vroom/extdata/mtcars.csv.gz
